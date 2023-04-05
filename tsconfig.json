@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "target": "es2017",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "dist",
+      "strict": true,
+      "sourceMap": true,
+      "types": ["phaser"]
+    },
+    "include": ["src/**/*.ts"]
+  }
+  

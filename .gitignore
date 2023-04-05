@@ -1,0 +1,12 @@
+# Node.js dependencies
+node_modules/
+
+# Distribution folder
+dist/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
