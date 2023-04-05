@@ -1,13 +1,13 @@
 {
-    "compilerOptions": {
-      "target": "es2017",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "outDir": "dist",
-      "strict": true,
-      "sourceMap": true,
-      "types": ["phaser"]
-    },
-    "include": ["src/**/*.ts"]
-  }
-  
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "strict": true,
+    "sourceMap": true,
+    "types": ["phaser"],
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*.ts"]
+}
