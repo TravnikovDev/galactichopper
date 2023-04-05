@@ -1,6 +1,7 @@
 const path = require("path");
 const process = require("process");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV || "development",
@@ -31,6 +32,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'public/index.html', // Make sure this points to the correct template file
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'assets', to: 'assets' },
+      ],
     }),
     // ... other plugins
   ],

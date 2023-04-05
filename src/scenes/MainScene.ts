@@ -13,10 +13,10 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
     // Set up the background color or image for the scene
-    this.cameras.main.setBackgroundColor('0x87ceeb');
+    this.cameras.main.setBackgroundColor("0x87ceeb");
 
-    // Add the player character to the scene
-    this.player = new Player(this, 100, this.scale.height - 100);
+    // Add players
+    this.createPlayer();
     this.add.existing(this.player);
 
     // Enable physics for the player
@@ -32,7 +32,12 @@ export default class MainScene extends Phaser.Scene {
     this.platforms = this.add.group();
 
     // Generate the initial set of platforms
-    this.generatePlatforms();
+    this.createPlatforms(); // Change 'generatePlatforms()' to 'createPlatforms()'
+
+    // Add collision between the player and the platforms
+    this.physics.add.collider(this.player, this.platforms);
+
+    this.handleWindowResize();
   }
 
   update() {
@@ -40,28 +45,40 @@ export default class MainScene extends Phaser.Scene {
     this.player.update(this.cursors);
   }
 
-  generatePlatforms() {
-    // Define the platform generation parameters
-    const numPlatforms = 10;
-    const platformWidth = 200;
-    const platformHeight = 20;
-    const minGap = 200;
-    const maxGap = 400;
-    const minHeightDifference = -100;
-    const maxHeightDifference = 100;
+  handleWindowResize() {
+    const resize = () => {
+      this.scale.resize(window.innerWidth, window.innerHeight);
+    };
 
-    // Generate platforms
-    for (let i = 0; i < numPlatforms; i++) {
-      const x = i * (platformWidth + Phaser.Math.Between(minGap, maxGap));
-      const y =
-        this.scale.height / 2 +
-        Phaser.Math.Between(minHeightDifference, maxHeightDifference);
+    window.addEventListener("resize", resize);
+  }
 
-      const platform = new Platform(this, x, y, platformWidth, platformHeight);
+  createPlatforms() {
+    // Create a starting platform for the player
+    const startingPlatform = new Platform(
+      this,
+      this.scale.width / 2,
+      this.scale.height * 0.7
+    );
+    startingPlatform.setScale(2, 1); // Adjust the size of the starting platform if needed
+    this.platforms.add(startingPlatform);
+
+    // Generate the other platforms
+    for (let i = 0; i < 10; i++) {
+      const x = Phaser.Math.Between(50, this.scale.width - 50);
+      const y = Phaser.Math.Between(100, this.scale.height - 100);
+      const scaleX = Phaser.Math.FloatBetween(0.5, 2);
+      const scaleY = Phaser.Math.FloatBetween(0.5, 1);
+      const platform = new Platform(this, x, y);
+      platform.setScale(scaleX, scaleY);
       this.platforms.add(platform);
     }
+  }
 
-    // Add collision between the player and the platforms
-    this.physics.add.collider(this.player, this.platforms);
+  createPlayer() {
+    // Set the player's starting position to be on the starting platform
+    const playerX = this.scale.width / 2;
+    const playerY = this.scale.height * 0.7 - 256; // Subtract the player's height (32) to place the player on the platform
+    this.player = new Player(this, playerX, playerY);
   }
 }

@@ -9,11 +9,13 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     // Add the player to the scene and enable physics
     scene.add.existing(this);
     scene.physics.add.existing(this);
+    scene.physics.world.enable(this);
 
     // Set up the player's initial properties
     this.moveSpeed = 200;
     this.setScale(1);
-    this.setOrigin(0.5, 0.5);
+    this.setSize(128, 256); // Make sure the body size matches the frame size of the player sprite
+    this.setOrigin(0.5, 1);
     this.setCollideWorldBounds(true);
 
     // Play the idle animation by default

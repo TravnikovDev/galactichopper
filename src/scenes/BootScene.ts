@@ -13,14 +13,14 @@ export default class BootScene extends Phaser.Scene {
 
     this.load.spritesheet(
       "player",
-      "assets/PNG/Spritesheets/spritesheet_players.png",
+      "assets/Spritesheets/spritesheet_players.png",
       {
-        frameWidth: 72,
-        frameHeight: 97,
+        frameWidth: 128,
+        frameHeight: 256,
       }
     );
 
-    this.load.image("platform", "assets/PNG/Tiles/tile_0002.png");
+    this.load.image("platform", "assets/PNG/Ground/Grass/grass.png");
     this.load.image("collectible", "assets/PNG/Items/coinGold.png");
   }
 
@@ -38,7 +38,7 @@ export default class BootScene extends Phaser.Scene {
     this.anims.create({
       key: "player_idle",
       frames: this.anims.generateFrameNumbers("player", {
-        frames: [0, 1, 2, 3],
+        frames: [5],
       }),
       frameRate: 10,
       repeat: -1,
@@ -48,7 +48,7 @@ export default class BootScene extends Phaser.Scene {
     this.anims.create({
       key: "player_run",
       frames: this.anims.generateFrameNumbers("player", {
-        frames: [4, 5, 6, 7, 8, 9, 10, 11],
+        frames: [12, 20, 28, 36],
       }),
       frameRate: 15,
       repeat: -1,
@@ -57,7 +57,7 @@ export default class BootScene extends Phaser.Scene {
     // Jump animation
     this.anims.create({
       key: "player_jump",
-      frames: this.anims.generateFrameNumbers("player", { frames: [12] }),
+      frames: this.anims.generateFrameNumbers("player", { frames: [22, 30] }),
       frameRate: 1,
       repeat: 0,
     });
